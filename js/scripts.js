@@ -43,7 +43,6 @@ function messageIT(item, duration) {
     theme: "dark"
   });
 }
-
 //Auto click that depends on the time delay
 function autoClick(timeDelay) {
   window.setInterval(function() {
