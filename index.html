@@ -4,12 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="Style.css" />
-    <script type="text/javascript" src="scripts.js"></script>
+    <!--LLAMADO DE CSS Y JS-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/iziToast.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/Style.css" />
+    <script type="text/javascript" src="js/jQuery.min.js"></script>
+    <script type="text/javascript" src="js/iziToast.min.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
     <title>Game</title>
   </head>
-  <body onload="startGame()">
-    <span id="counted">asdsada</span>
-    <canvas id="canvas" onclick="updateCounter()"> </canvas>
+  <body>
+    <div>
+      <label id="counter"></label>
+      <br />
+      <div>
+        <img
+          id="clickImage"
+          onclick="clickImage()"
+          width="200px"
+          height="200px"
+          src="images/01100110 01101001 01110010 01110011 01110100 00100000 01100101 01100001 01110011 01110100 01100101 01110010 00100000 01100101 01100111 01100111 01110111 01101000 01100001 01110100 00100000 011.jpg"
+          alt="No image for u."
+        />
+
+        <label id="labelPrecioClicks" for="buttonComprarClicks"
+          >Comprar autoClicks por 10 clicks
+        </label>
+        <button id="buttonComprarClicks" onclick="comprarclicks();">X</button>
+        <label for="buttonComprar"></label>
+        <button>X</button>
+      </div>
+    </div>
   </body>
 </html>
