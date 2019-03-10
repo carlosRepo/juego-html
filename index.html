@@ -17,7 +17,7 @@
     <div>
       <label id="counter"></label>
       <br />
-      <div>
+      <div class="row">
         <img
           id="clickImage"
           onclick="clickImage()"
@@ -26,13 +26,17 @@
           src="images/01100110 01101001 01110010 01110011 01110100 00100000 01100101 01100001 01110011 01110100 01100101 01110010 00100000 01100101 01100111 01100111 01110111 01101000 01100001 01110100 00100000 011.jpg"
           alt="No image for u."
         />
+        <div>
+          <label id="labelPrecioClicks" for="buttonComprarClicks"
+            >Buy autoClicks by 10 clicks
+          </label>
+          <button id="buttonComprarClicks" onclick="comprarclicks();">X</button>
 
-        <label id="labelPrecioClicks" for="buttonComprarClicks"
-          >Comprar autoClicks por 10 clicks
-        </label>
-        <button id="buttonComprarClicks" onclick="comprarclicks();">X</button>
-        <label for="buttonComprar"></label>
-        <button>X</button>
+          <label id="labelPrecio" for="buttonComprar"
+            >Buy machine of clicks by 100 clicks</label
+          >
+          <button>X</button>
+        </div>
       </div>
     </div>
   </body>
