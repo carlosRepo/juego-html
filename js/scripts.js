@@ -45,7 +45,7 @@ function comprarclicks() {
     cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
     autoClick(1000); //ejecuta el auto click cada 1 segundo
     document.getElementById("labelPrecioClicks").innerHTML =
-      "Buy autoClicks by " + precioClicks + " clicks"; //
+      "Buy autoClicks by " + precioClicks + " clicks"; // cambia el label
     updateCounter();
     messageIT("Clicks", 3000);
   }
