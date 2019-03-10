@@ -6,6 +6,9 @@ var buttonComprarClicks = document.getElementById("buttonComprarClicks");
 
 //Variables to use
 var precioClicks = 10;
+var precioBunnyWorkers = 100;
+var precioTrucks = 1000;
+var precioBackhoe = 10000;
 
 //Booleans to unlock new improvements
 var comproAutoclicks = false;
@@ -13,9 +16,8 @@ var comproBunnyWorkers = false;
 var comproTrucks = false;
 var comproBackhoe = false;
 
-//Booleans to unlock new upgrades
+//Quantity of items
 var cantidadAutoclick = 0;
-var cantidadBunnyWorkers = 0;
 var cantidadBunnyWorkers = 0;
 var cantidadTrucks = 0;
 var cantidadBackhoe = 0;
