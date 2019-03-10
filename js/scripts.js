@@ -40,11 +40,12 @@ function updateCounter() {
 //Buy a "mouse" to click every 1 second
 function comprarclicks() {
   if (clicksCounter >= precioClicks) {
-    clicksCounter -= precioClicks;
-    precioClicks += 10;
-    autoClick(1000);
+    clicksCounter -= precioClicks; //Baja el numero de clicks disponibles
+    precioClicks += 10; //aumenta el precio de los clics
+    cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
+    autoClick(1000); //ejecuta el auto click cada 1 segundo
     document.getElementById("labelPrecioClicks").innerHTML =
-      "Comprar autoClicks por " + precioClicks + " clicks";
+      "Buy autoClicks by " + precioClicks + " clicks"; //
     updateCounter();
     messageIT("Clicks", 3000);
   }
