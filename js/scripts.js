@@ -64,3 +64,5 @@ function autoClick(timeDelay) {
     clickImage();
   }, timeDelay);
 }
+
+//prueba
