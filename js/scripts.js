@@ -4,7 +4,13 @@ var counter = document.getElementById("counter");
 var labelPrecioClicks = document.getElementById("labelPrecioClicks");
 var buttonComprarClicks = document.getElementById("buttonComprarClicks");
 
-//Variables to use
+//Variables incrementables
+var precioIncrementalClicks = 10;
+var precioIncrementalBunnyWorkers = 100;
+var precioIncrementalTrucks = 1000;
+var precioIncrementalBackhoe = 10000;
+
+//Variables original
 var precioClicks = 10;
 var precioBunnyWorkers = 100;
 var precioTrucks = 1000;
@@ -23,7 +29,7 @@ var cantidadTrucks = 0;
 var cantidadBackhoe = 0;
 
 //Counter the clicks
-var clicksCounter = 0;
+var clicksCounter = 100000;
 
 //onclick of the image in the html doc
 function clickImage() {
@@ -41,13 +47,19 @@ function updateCounter() {
 function comprarclicks() {
   if (clicksCounter >= precioClicks) {
     clicksCounter -= precioClicks; //Baja el numero de clicks disponibles
-    precioClicks += 10; //aumenta el precio de los clics
     cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
-    autoClick(1000); //ejecuta el auto click cada 1 segundo
+    increasePrice("autoClick", cantidadAutoclick); //aumenta el precio incrementable
+    precioClicks += precioIncrementalClicks; //precio base += el precio aumentado
+    autoClick(1000); //activa que se ejecute el auto click cada 1 segundo
     document.getElementById("labelPrecioClicks").innerHTML =
-      "Buy autoClicks by " + precioClicks + " clicks"; // cambia el label
+      "Buy autoClicks by " +
+      precioClicks +
+      " clicks" +
+      "<br> Owned = " +
+      cantidadAutoclick +
+      ""; // cambia el label
     updateCounter();
-    messageIT("Clicks", 3000);
+    messageIT("Clicks", 3000); //mensaje con izitoast
   }
 }
 
@@ -68,4 +80,19 @@ function autoClick(timeDelay) {
   }, timeDelay);
 }
 
-//prueba
+function increasePrice(itemName, itemQuantity) {
+  if (itemQuantity % 10 == 0) {
+    if (itemName == "autoClick") {
+      precioIncrementalClicks += 10;
+    }
+    if (itemName == "bunnyWorkers") {
+      precioIncrementalBunnyWorkers += 100;
+    }
+    if (itemName == "truck") {
+      precioIncrementalTrucks += 1000;
+    }
+    if (itemName == "backhoe") {
+      precioIncrementalBackhoe += 10000;
+    }
+  }
+}
