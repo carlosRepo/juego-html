@@ -3,8 +3,22 @@ var img = document.getElementById("clickImage");
 var counter = document.getElementById("counter");
 var labelPrecioClicks = document.getElementById("labelPrecioClicks");
 var buttonComprarClicks = document.getElementById("buttonComprarClicks");
+
 //Variables to use
 var precioClicks = 10;
+
+//Booleans to unlock new improvements
+var comproAutoclicks = false;
+var comproBunnyWorkers = false;
+var comproTrucks = false;
+var comproBackhoe = false;
+
+//Booleans to unlock new upgrades
+var cantidadAutoclick = 0;
+var cantidadBunnyWorkers = 0;
+var cantidadBunnyWorkers = 0;
+var cantidadTrucks = 0;
+var cantidadBackhoe = 0;
 
 //Counter the clicks
 var clicksCounter = 0;
@@ -43,6 +57,7 @@ function messageIT(item, duration) {
     theme: "dark"
   });
 }
+
 //Auto click that depends on the time delay
 function autoClick(timeDelay) {
   window.setInterval(function() {
