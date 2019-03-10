@@ -25,7 +25,7 @@ function updateCounter() {
 function comprarclicks() {
   if (clicksCounter >= precioClicks) {
     clicksCounter -= precioClicks;
-    precioClicks *= 1.5;
+    precioClicks += 10;
     autoClick(1000);
     document.getElementById("labelPrecioClicks").innerHTML =
       "Comprar autoClicks por " + precioClicks + " clicks";
