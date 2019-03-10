@@ -6,6 +6,9 @@ var buttonComprarClicks = document.getElementById("buttonComprarClicks");
 
 //Variables to use
 var precioClicks = 10;
+var precioBunnyWorkers = 100;
+var precioTrucks = 1000;
+var precioBackhoe = 10000;
 
 //Booleans to unlock new improvements
 var comproAutoclicks = false;
@@ -13,9 +16,8 @@ var comproBunnyWorkers = false;
 var comproTrucks = false;
 var comproBackhoe = false;
 
-//Booleans to unlock new upgrades
+//Quantity of items
 var cantidadAutoclick = 0;
-var cantidadBunnyWorkers = 0;
 var cantidadBunnyWorkers = 0;
 var cantidadTrucks = 0;
 var cantidadBackhoe = 0;
@@ -38,11 +40,12 @@ function updateCounter() {
 //Buy a "mouse" to click every 1 second
 function comprarclicks() {
   if (clicksCounter >= precioClicks) {
-    clicksCounter -= precioClicks;
-    precioClicks += 10;
-    autoClick(1000);
+    clicksCounter -= precioClicks; //Baja el numero de clicks disponibles
+    precioClicks += 10; //aumenta el precio de los clics
+    cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
+    autoClick(1000); //ejecuta el auto click cada 1 segundo
     document.getElementById("labelPrecioClicks").innerHTML =
-      "Comprar autoClicks por " + precioClicks + " clicks";
+      "Buy autoClicks by " + precioClicks + " clicks"; //
     updateCounter();
     messageIT("Clicks", 3000);
   }
@@ -64,3 +67,5 @@ function autoClick(timeDelay) {
     clickImage();
   }, timeDelay);
 }
+
+//prueba
