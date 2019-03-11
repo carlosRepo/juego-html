@@ -3,7 +3,8 @@ var img = document.getElementById("clickImage");
 var counter = document.getElementById("counter");
 var labelPrecioClicks = document.getElementById("labelPrecioClicks");
 var buttonComprarClicks = document.getElementById("buttonComprarClicks");
-
+var labelOwnedClicks = document.getElementById("labelOwnedClicks");
+console.log(labelOwnedClicks);
 //Variables incrementables
 var precioIncrementalClicks = 10;
 var precioIncrementalBunnyWorkers = 100;
@@ -58,6 +59,7 @@ function comprarclicks() {
       "<br> Owned = " +
       cantidadAutoclick +
       ""; // cambia el label
+    labelOwned(labelOwnedClicks, cantidadAutoclick);
     updateCounter();
     messageIT("Clicks", 3000); //mensaje con izitoast
   }
@@ -94,6 +96,11 @@ function moreClick(Quantity, timeDelay) {
   window.setInterval(function() {
     clicksCounter += Quantity;
   }, timeDelay);
+}
+
+function labelOwned(label, cantidad) {
+  console.log(label);
+  document.getElementById(label).innerHTML = "Owned = " + cantidad + "";
 }
 
 function increasePrice(itemName, itemQuantity) {
