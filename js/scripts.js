@@ -63,6 +63,16 @@ function comprarclicks() {
   }
 }
 
+function comprarbunnyworkers() {
+  if (clicksCounter >= precioBunnyWorkers) {
+    clicksCounter -= precioBunnyWorkers;
+    cantidadBunnyWorkers;
+    increasePrice("bunnyWorkers", cantidadBunnyWorkers);
+    precioBunnyWorkers += precioIncrementalBunnyWorkers;
+    moreClick(2, 1000);
+  }
+}
+
 //Messages with iziToast
 function messageIT(item, duration) {
   iziToast.show({
@@ -77,6 +87,12 @@ function messageIT(item, duration) {
 function autoClick(timeDelay) {
   window.setInterval(function() {
     clickImage();
+  }, timeDelay);
+}
+//Give more clicks to the counter
+function moreClick(Quantity, timeDelay) {
+  window.setInterval(function() {
+    clicksCounter += Quantity;
   }, timeDelay);
 }
 

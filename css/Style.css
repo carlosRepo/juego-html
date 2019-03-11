@@ -13,14 +13,12 @@ canvas {
 .hidden {
   display: none;
 }
-.clickImage{
+.clickImage {
   transition: 0.75s ease;
-  
-  
 }
-.clickImage:active{
-    transform: scale(0.5);
-  }
+.clickImage:active {
+  transform: scale(0.5);
+}
 /*.row{
     animation: 2s rotate360 infinite linear;
   }
