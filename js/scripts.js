@@ -107,7 +107,7 @@ function comprartrucks() {
     if (clicksCounter >= precioTrucks) {
       clicksCounter -= precioTrucks;
       cantidadTrucks += 1;
-      increasePrice("trucks", cantidadTrucks);
+      increasePrice("truck", cantidadTrucks);
       precioTrucks += precioIncrementalTrucks;
       autoClick(4, 1000);
       updateLabelsInfo(
