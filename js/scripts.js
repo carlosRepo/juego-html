@@ -59,7 +59,7 @@ function updateCounter() {
   counter.innerHTML = "This has been clicked " + clicksCounter + " times.";
 }
 
-//Buy a "mouse" to click every 1 second
+//Buy a Auto click
 function comprarclicks() {
   if (clicksCounter >= precioClicks) {
     clicksCounter -= precioClicks; //Baja el numero de clicks disponibles
@@ -76,46 +76,76 @@ function comprarclicks() {
     );
     updateCounter();
     messageIT("Clicks", 3000); //mensaje con izitoast
+    comproAutoclicks = true;
   }
 }
 
 function comprarbunnyworkers() {
-  if (clicksCounter >= precioBunnyWorkers) {
-    clicksCounter -= precioBunnyWorkers;
-    cantidadBunnyWorkers += 1;
-    increasePrice("bunnyWorkers", cantidadBunnyWorkers);
-    precioBunnyWorkers += precioIncrementalBunnyWorkers;
-    autoClick(2, 1000);
-    updateLabelsInfo(
-      "Bunny Workers",
-      labelPrecioBunnyWorkers,
-      labelOwnedBunnyWorkers,
-      cantidadBunnyWorkers,
-      precioBunnyWorkers
-    );
-    updateCounter();
-    messageIT("Bunny Workers", 3000);
+  if (comproAutoclicks) {
+    if (clicksCounter >= precioBunnyWorkers) {
+      clicksCounter -= precioBunnyWorkers;
+      cantidadBunnyWorkers += 1;
+      increasePrice("bunnyWorkers", cantidadBunnyWorkers);
+      precioBunnyWorkers += precioIncrementalBunnyWorkers;
+      autoClick(2, 1000);
+      updateLabelsInfo(
+        "Bunny Workers",
+        labelPrecioBunnyWorkers,
+        labelOwnedBunnyWorkers,
+        cantidadBunnyWorkers,
+        precioBunnyWorkers
+      );
+      updateCounter();
+      messageIT("Bunny Workers", 3000);
+      comproBunnyWorkers = true;
+    }
   }
 }
 
 function comprartrucks() {
-  if (clicksCounter >= precioTrucks) {
-    clicksCounter -= precioTrucks;
-    cantidadTrucks += 1;
-    increasePrice("trucks", cantidadTrucks);
-    precioTrucks += precioIncrementalTrucks;
-    autoClick(4, 1000);
-    updateLabelsInfo(
-      "Trucks",
-      labelPrecioTrucks,
-      labelOwnedTrucks,
-      cantidadTrucks,
-      precioTrucks
-    );
-    updateCounter();
-    messageIT("Trucks", 3000);
+  if (comproBunnyWorkers) {
+    if (clicksCounter >= precioTrucks) {
+      clicksCounter -= precioTrucks;
+      cantidadTrucks += 1;
+      increasePrice("trucks", cantidadTrucks);
+      precioTrucks += precioIncrementalTrucks;
+      autoClick(4, 1000);
+      updateLabelsInfo(
+        "Trucks",
+        labelPrecioTrucks,
+        labelOwnedTrucks,
+        cantidadTrucks,
+        precioTrucks
+      );
+      updateCounter();
+      messageIT("Trucks", 3000);
+      comproTrucks = true;
+    }
   }
 }
+
+function comprarbackhoe() {
+  if (comproTrucks) {
+    if (clicksCounter >= precioBackhoe) {
+      clicksCounter -= precioBackhoe;
+      cantidadBackhoe += 1;
+      increasePrice("backhoe", cantidadBackhoe);
+      precioBackhoe += precioIncrementalBackhoe;
+      autoClick(500, 1000);
+      updateLabelsInfo(
+        "Backhoe",
+        labelPrecioBackhoe,
+        labelOwnedBackhoe,
+        cantidadBackhoe,
+        precioBackhoe
+      );
+      updateCounter();
+      messageIT("Backhoe", 3000);
+      comproTrucks = true;
+    }
+  }
+}
+
 //Messages with iziToast
 function messageIT(item, duration) {
   iziToast.show({
