@@ -2,9 +2,25 @@
 var img = document.getElementById("clickImage");
 var counter = document.getElementById("counter");
 var labelPrecioClicks = document.getElementById("labelPrecioClicks");
-var buttonComprarClicks = document.getElementById("buttonComprarClicks");
 var labelOwnedClicks = document.getElementById("labelOwnedClicks");
-console.log(labelOwnedClicks);
+var buttonComprarClicks = document.getElementById("buttonComprarClicks");
+
+var labelPrecioBunnyWorkers = document.getElementById(
+  "labelPrecioBunnyWorkers"
+);
+var labelOwnedBunnyWorkers = document.getElementById("labelOwnedBunnyWorkers");
+var buttonComprarBunnyWorkers = document.getElementById(
+  "buttonComprarBunnyWorkers"
+);
+
+var labelPrecioTrucks = document.getElementById("labelPrecioTrucks");
+var labelOwnedTrucks = document.getElementById("labelOwnedTrucks");
+var buttonComprarTrucks = document.getElementById("buttonComprarTrucks");
+
+var labelPrecioBackhoe = document.getElementById("labelPrecioBackhoe");
+var labelOwnedBackhoe = document.getElementById("labelOwnedBackhoe");
+var buttonComprarBackhoe = document.getElementById("buttonComprarBackhoe");
+
 //Variables incrementables
 var precioIncrementalClicks = 10;
 var precioIncrementalBunnyWorkers = 100;
@@ -40,8 +56,7 @@ function clickImage() {
 
 //Update the counter of the clicks
 function updateCounter() {
-  document.getElementById("counter").innerHTML =
-    "This has been clicked " + clicksCounter + " times.";
+  counter.innerHTML = "This has been clicked " + clicksCounter + " times.";
 }
 
 //Buy a "mouse" to click every 1 second
@@ -51,15 +66,14 @@ function comprarclicks() {
     cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
     increasePrice("autoClick", cantidadAutoclick); //aumenta el precio incrementable
     precioClicks += precioIncrementalClicks; //precio base += el precio aumentado
-    autoClick(1000); //activa que se ejecute el auto click cada 1 segundo
-    document.getElementById("labelPrecioClicks").innerHTML =
-      "Buy autoClicks by " +
-      precioClicks +
-      " clicks" +
-      "<br> Owned = " +
-      cantidadAutoclick +
-      ""; // cambia el label
-    labelOwned(labelOwnedClicks, cantidadAutoclick);
+    autoClick(1, 1000); //activa que se ejecute el auto click cada 1 segundo
+    updateLabelsInfo(
+      "Auto Clicks",
+      labelPrecioClicks,
+      labelOwnedClicks,
+      cantidadAutoclick,
+      precioClicks
+    );
     updateCounter();
     messageIT("Clicks", 3000); //mensaje con izitoast
   }
@@ -68,13 +82,40 @@ function comprarclicks() {
 function comprarbunnyworkers() {
   if (clicksCounter >= precioBunnyWorkers) {
     clicksCounter -= precioBunnyWorkers;
-    cantidadBunnyWorkers;
+    cantidadBunnyWorkers += 1;
     increasePrice("bunnyWorkers", cantidadBunnyWorkers);
     precioBunnyWorkers += precioIncrementalBunnyWorkers;
-    moreClick(2, 1000);
+    autoClick(2, 1000);
+    updateLabelsInfo(
+      "Bunny Workers",
+      labelPrecioBunnyWorkers,
+      labelOwnedBunnyWorkers,
+      cantidadBunnyWorkers,
+      precioBunnyWorkers
+    );
+    updateCounter();
+    messageIT("Bunny Workers", 3000);
   }
 }
 
+function comprartrucks() {
+  if (clicksCounter >= precioTrucks) {
+    clicksCounter -= precioTrucks;
+    cantidadTrucks += 1;
+    increasePrice("trucks", cantidadTrucks);
+    precioTrucks += precioIncrementalTrucks;
+    autoClick(4, 1000);
+    updateLabelsInfo(
+      "Trucks",
+      labelPrecioTrucks,
+      labelOwnedTrucks,
+      cantidadTrucks,
+      precioTrucks
+    );
+    updateCounter();
+    messageIT("Trucks", 3000);
+  }
+}
 //Messages with iziToast
 function messageIT(item, duration) {
   iziToast.show({
@@ -85,22 +126,23 @@ function messageIT(item, duration) {
   });
 }
 
-//Auto click that depends on the time delay
-function autoClick(timeDelay) {
-  window.setInterval(function() {
-    clickImage();
-  }, timeDelay);
-}
-//Give more clicks to the counter
-function moreClick(Quantity, timeDelay) {
+//Auto click
+function autoClick(Quantity, timeDelay) {
   window.setInterval(function() {
     clicksCounter += Quantity;
+    updateCounter();
   }, timeDelay);
 }
 
-function labelOwned(label, cantidad) {
-  console.log(label);
-  document.getElementById(label).innerHTML = "Owned = " + cantidad + "";
+function updateLabelsInfo(
+  item,
+  labelInfoBuy,
+  labelInfoOwned,
+  cantidad,
+  precio
+) {
+  labelInfoBuy.innerHTML = "Buy " + item + " by " + precio + " clicks";
+  labelInfoOwned.innerHTML = "Owned = " + cantidad + "";
 }
 
 function increasePrice(itemName, itemQuantity) {
