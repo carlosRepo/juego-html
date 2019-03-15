@@ -1,33 +1,35 @@
-//Get elements
-var img = document.getElementById("clickImage");
-var counter = document.getElementById("counter");
-var labelPrecioClicks = document.getElementById("labelPrecioClicks");
-var labelOwnedClicks = document.getElementById("labelOwnedClicks");
-var buttonComprarClicks = document.getElementById("buttonComprarClicks");
+//Elements
+const img = document.getElementById("clickImage");
+const counter = document.getElementById("counter");
+const labelPrecioClicks = document.getElementById("labelPrecioClicks");
+const labelOwnedClicks = document.getElementById("labelOwnedClicks");
+const buttonComprarClicks = document.getElementById("buttonComprarClicks");
+const labelPrecioBunnyWorkers = document.getElementById("labelPrecioBunnyWorkers");
+const labelOwnedBunnyWorkers = document.getElementById("labelOwnedBunnyWorkers");
+const buttonComprarBunnyWorkers = document.getElementById("buttonComprarBunnyWorkers");
+const labelPrecioTrucks = document.getElementById("labelPrecioTrucks");
+const labelOwnedTrucks = document.getElementById("labelOwnedTrucks");
+const buttonComprarTrucks = document.getElementById("buttonComprarTrucks");
+const labelPrecioBackhoe = document.getElementById("labelPrecioBackhoe");
+const labelOwnedBackhoe = document.getElementById("labelOwnedBackhoe");
+const buttonComprarBackhoe = document.getElementById("buttonComprarBackhoe");
 
-var labelPrecioBunnyWorkers = document.getElementById(
-  "labelPrecioBunnyWorkers"
-);
-var labelOwnedBunnyWorkers = document.getElementById("labelOwnedBunnyWorkers");
-var buttonComprarBunnyWorkers = document.getElementById(
-  "buttonComprarBunnyWorkers"
-);
+//Events
+buttonComprarClicks.addEventListener('click', comprarclicks);
+buttonComprarBunnyWorkers.addEventListener('click', comprarbunnyworkers);
+buttonComprarTrucks.addEventListener('click', comprartrucks);
+buttonComprarBackhoe.addEventListener('click', comprarbackhoe);
 
-var labelPrecioTrucks = document.getElementById("labelPrecioTrucks");
-var labelOwnedTrucks = document.getElementById("labelOwnedTrucks");
-var buttonComprarTrucks = document.getElementById("buttonComprarTrucks");
+//Counter the clicks
+var clicksCounter = 100000;//Start at 0
 
-var labelPrecioBackhoe = document.getElementById("labelPrecioBackhoe");
-var labelOwnedBackhoe = document.getElementById("labelOwnedBackhoe");
-var buttonComprarBackhoe = document.getElementById("buttonComprarBackhoe");
-
-//Variables incrementables
+//Incremental price
 var precioIncrementalClicks = 10;
 var precioIncrementalBunnyWorkers = 100;
 var precioIncrementalTrucks = 1000;
 var precioIncrementalBackhoe = 10000;
 
-//Variables original
+//Original prices
 var precioClicks = 10;
 var precioBunnyWorkers = 100;
 var precioTrucks = 1000;
@@ -45,23 +47,24 @@ var cantidadBunnyWorkers = 0;
 var cantidadTrucks = 0;
 var cantidadBackhoe = 0;
 
-//Counter the clicks
-var clicksCounter = 100000;
-
 //onclick of the image in the html doc
-function clickImage() {
+function clickImage()
+{
   clicksCounter++;
   updateCounter();
 }
 
 //Update the counter of the clicks
-function updateCounter() {
+function updateCounter()
+{
   counter.innerHTML = "This has been clicked " + clicksCounter + " times.";
 }
 
 //Buy a Auto click
-function comprarclicks() {
-  if (clicksCounter >= precioClicks) {
+function comprarclicks()
+{
+  if (isPurchasable(precioClicks))
+  {
     clicksCounter -= precioClicks; //Baja el numero de clicks disponibles
     cantidadAutoclick += 1; //aumenta la cantidad de Autoclicks obtenidos
     increasePrice("autoClick", cantidadAutoclick); //aumenta el precio incrementable
@@ -80,9 +83,12 @@ function comprarclicks() {
   }
 }
 
-function comprarbunnyworkers() {
-  if (comproAutoclicks) {
-    if (clicksCounter >= precioBunnyWorkers) {
+function comprarbunnyworkers()
+{
+  if (comproAutoclicks)
+  {
+    if (isPurchasable(precioBunnyWorkers))
+    {
       clicksCounter -= precioBunnyWorkers;
       cantidadBunnyWorkers += 1;
       increasePrice("bunnyWorkers", cantidadBunnyWorkers);
@@ -102,9 +108,12 @@ function comprarbunnyworkers() {
   }
 }
 
-function comprartrucks() {
-  if (comproBunnyWorkers) {
-    if (clicksCounter >= precioTrucks) {
+function comprartrucks()
+{
+  if (comproBunnyWorkers)
+  {
+    if (isPurchasable(precioTrucks))
+    {
       clicksCounter -= precioTrucks;
       cantidadTrucks += 1;
       increasePrice("truck", cantidadTrucks);
@@ -124,21 +133,18 @@ function comprartrucks() {
   }
 }
 
-function comprarbackhoe() {
-  if (comproTrucks) {
-    if (clicksCounter >= precioBackhoe) {
+function comprarbackhoe()
+{
+  if (comproTrucks)
+  {
+    if (isPurchasable(precioBackhoe))
+    {
       clicksCounter -= precioBackhoe;
       cantidadBackhoe += 1;
       increasePrice("backhoe", cantidadBackhoe);
       precioBackhoe += precioIncrementalBackhoe;
       autoClick(500, 1000);
-      updateLabelsInfo(
-        "Backhoe",
-        labelPrecioBackhoe,
-        labelOwnedBackhoe,
-        cantidadBackhoe,
-        precioBackhoe
-      );
+      updateLabelsInfo("Backhoe", labelPrecioBackhoe, labelOwnedBackhoe, cantidadBackhoe, precioBackhoe);
       updateCounter();
       messageIT("Backhoe", 3000);
       comproTrucks = true;
@@ -147,7 +153,8 @@ function comprarbackhoe() {
 }
 
 //Messages with iziToast
-function messageIT(item, duration) {
+function messageIT(item, duration)
+{
   iziToast.show({
     title: "✔",
     message: "More " + item + " !",
@@ -157,36 +164,44 @@ function messageIT(item, duration) {
 }
 
 //Auto click
-function autoClick(Quantity, timeDelay) {
-  window.setInterval(function() {
+function autoClick(Quantity, timeDelay)
+{
+  window.setInterval(function ()
+  {
     clicksCounter += Quantity;
     updateCounter();
   }, timeDelay);
 }
 
-function updateLabelsInfo(
-  item,
-  labelInfoBuy,
-  labelInfoOwned,
-  cantidad,
-  precio
-) {
-  labelInfoBuy.innerHTML = "Buy " + item + " by " + precio + " clicks";
-  labelInfoOwned.innerHTML = "Owned = " + cantidad + "";
+function isPurchasable(itemPrice)
+{
+  return (clicksCounter >= itemPrice) ? true : false;
 }
 
-function increasePrice(itemName, itemQuantity) {
-  if (itemQuantity % 10 == 0) {
-    if (itemName == "autoClick") {
+function updateLabelsInfo(item, labelInfoBuy, labelInfoOwned, quantity, price)
+{
+  labelInfoBuy.innerHTML = "Buy " + item + " by " + price + " clicks";
+  labelInfoOwned.innerHTML = "Owned = " + quantity + "";
+}
+
+function increasePrice(itemName, itemQuantity)
+{
+  if (itemQuantity % 10 == 0)
+  {
+    if (itemName == "autoClick")
+    {
       precioIncrementalClicks += 10;
     }
-    if (itemName == "bunnyWorkers") {
+    if (itemName == "bunnyWorkers")
+    {
       precioIncrementalBunnyWorkers += 100;
     }
-    if (itemName == "truck") {
+    if (itemName == "truck")
+    {
       precioIncrementalTrucks += 1000;
     }
-    if (itemName == "backhoe") {
+    if (itemName == "backhoe")
+    {
       precioIncrementalBackhoe += 10000;
     }
   }
